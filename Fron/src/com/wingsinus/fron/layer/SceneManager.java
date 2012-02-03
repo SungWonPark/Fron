@@ -15,6 +15,7 @@ public class SceneManager {
 	public CCLayer mapZoomLayer;
 	public MapLayer mapLayer;
 	public InterfaceLayer interfaceLayer;
+	public DialogLayer dlgLayer;
 	
 	
 	public SceneManager() {
@@ -34,11 +35,13 @@ public class SceneManager {
        mainScene = CCScene.node();
        mapZoomLayer = CCLayer.node();
        mapLayer = new MapLayer(ccColor4B.ccc4(255, 255, 255, 0));
-       mapLayer.setAnchorPoint(0 ,0);
+//       mapLayer.setAnchorPoint(0 ,0);
        interfaceLayer = new InterfaceLayer(ccColor4B.ccc4(255, 255, 255, 0));
+       dlgLayer = new DialogLayer(ccColor4B.ccc4(255, 255, 255, 0));
        mainScene.addChild(mapZoomLayer);
        mapZoomLayer.addChild(mapLayer);
        mainScene.addChild(interfaceLayer);
+       mainScene.addChild(dlgLayer);
        mapLayer.init();
        interfaceLayer.init();
        CCDirector.sharedDirector().runWithScene(mainScene);

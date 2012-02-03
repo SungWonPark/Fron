@@ -27,7 +27,6 @@ public class MainActivity extends Activity {
         mGLSurfaceView = new CCGLSurfaceView(this);
         
         setContentView(mGLSurfaceView);
-        FronBitmapMaker.getInstance().setContext(this);
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
     

@@ -34,7 +34,7 @@ public class MapItemController implements IInterfaceDelegate{
 	}
 	
 	private void makeImage() {
-		Bitmap bitmap = FronBitmapMaker.makeBitmap(fileName);
+		Bitmap bitmap = FronBitmapMaker.getInstance().makeBitmap(fileName, true);
 		mainImage = new CCSprite(bitmap, fileName);
 		mainImage.setPosition(defaultX, defaultY);
 	}
@@ -68,10 +68,7 @@ public class MapItemController implements IInterfaceDelegate{
 		mainImage.setPosition(current.x + x,  current.y+y);
 	}
 	public boolean checkDown(CGPoint pt) {
-		CGRect rect = mainImage.getBoundingBox();
-		
 		if(getImage().getBoundingBox().contains(pt.x, pt.y)) {
-			Log.i("return true", "aa");
 			return true;
 		}
 		return false;

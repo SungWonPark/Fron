@@ -8,9 +8,6 @@ import android.util.Log;
 public class Button extends CCSprite implements IInterfaceDelegate {
 
 	private Boolean isPushed = false;
-	public Button() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public Button(String filepath) {
 		super(filepath);

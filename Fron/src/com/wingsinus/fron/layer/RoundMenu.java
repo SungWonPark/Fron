@@ -23,12 +23,12 @@ public class RoundMenu implements IInterfaceDelegate {
 	
 	public RoundMenu() {
 		// TODO Auto-generated constructor stub
-		bg = new CCSprite("button/toolbutton_bg.png");
-		okButton = new Button("button/toolbutton_ok.png");
-		cancelButton = new Button("button/toolbutton_cancel.png");
-		sellButton = new Button("button/toolbutton_sale.png");
-		storageButton = new Button("button/toolbutton_ininventory.png");
-		rotateButton = new Button("button/toolbutton_rotate.png");
+		bg = new CCSprite("interface/toolbutton_bg.png");
+		okButton = new Button("interface/toolbutton_ok.png");
+		cancelButton = new Button("interface/toolbutton_cancel.png");
+		sellButton = new Button("interface/toolbutton_sale.png");
+		storageButton = new Button("interface/toolbutton_ininventory.png");
+		rotateButton = new Button("interface/toolbutton_rotate.png");
 	}
 	
 	public void init(InterfaceLayer layer) {

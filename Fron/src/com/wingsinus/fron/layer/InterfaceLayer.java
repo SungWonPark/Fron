@@ -2,10 +2,8 @@ package com.wingsinus.fron.layer;
 
 import java.util.ArrayList;
 
-import org.cocos2d.events.CCTouchDispatcher;
 import org.cocos2d.layers.CCColorLayer;
 import org.cocos2d.nodes.CCDirector;
-import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.ccColor4B;
 
@@ -15,23 +13,24 @@ import android.view.MotionEvent;
 public class InterfaceLayer extends CCColorLayer {
 
 	private RoundMenu roundMenu;
-	private ArrayList<Object> buttonArray;
+	private ArrayList<IInterfaceDelegate> buttonArray;
 	private CGPoint firstPt;
+	private Button marketButton;
 	
 	public InterfaceLayer(ccColor4B color) {
 		super(color);
-		// TODO Auto-generated constructor stub
-	}
-
-	public InterfaceLayer(ccColor4B color, float w, float h) {
-		super(color, w, h);
-		// TODO Auto-generated constructor stub
+		buttonArray = new ArrayList<IInterfaceDelegate>();
 	}
 
 	public void init() {
 		setIsTouchEnabled(true);
 		makeRoundMenu();
-//		roundMenu.show(CGPoint.make(300, 300));
+		marketButton = new Button("interface/button_market.png");
+		marketButton.setPosition(600, 50);
+		addChild(marketButton);
+		buttonArray.add(marketButton);
+		
+		
 	}
 	private void makeRoundMenu() {
 		roundMenu = new RoundMenu();
@@ -53,6 +52,13 @@ public class InterfaceLayer extends CCColorLayer {
 			return true;
 		}
 		//other button check.
+		int len = buttonArray.size();
+		for(int i = 0; i < len; i++) {
+			if(buttonArray.get(i).checkDown(pt)) {
+				firstPt = pt;
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -69,6 +75,17 @@ public class InterfaceLayer extends CCColorLayer {
 	    			firstPt = null;
 	    			return true;
 	    		}
+	    		else {
+	    			int len = buttonArray.size();
+		    		for(int i = 0; i < len; i++) {
+		    			if(buttonArray.get(i).checkAndClick(pt)) {
+		    				buttonClickAction(buttonArray.get(i));
+		    				firstPt = null;
+		    				return true;
+		    			}
+		    		}
+	    		}
+	    		
 	    		//other button check. buttonarray
 	    	}
 	    	else {
@@ -79,4 +96,9 @@ public class InterfaceLayer extends CCColorLayer {
     	}
     	return false;
 	}
+    private void buttonClickAction(IInterfaceDelegate button) {
+    	if(button == marketButton) {
+    		SceneManager.getInstance().dlgLayer.openMarketDialog();
+    	}
+    }
 }

@@ -48,7 +48,7 @@ public class MapLayer extends CCColorLayer {
 		
 		MapItemController item = null;
 		
-		item = MapItemFactory.makeMapItem(MapItemFactory.WATERFEED);
+		item = MapItemFactory.makeMapItem(MapItemFactory.CHERRY_PINK);
 		list.add(item);
 		addChild(item.getImage());
 		item.isoMoveTo(0,  0);
@@ -59,7 +59,7 @@ public class MapLayer extends CCColorLayer {
 	}
 	
 	private void makeGround() {
-		Bitmap bitmap = FronBitmapMaker.getInstance().loadBitmap(R.drawable.land_03);
+		Bitmap bitmap = FronBitmapMaker.getInstance().makeBitmap("map/land_03.png", false);
 		Bitmap target = Bitmap.createBitmap(60*ServerData.mapSize, 30*ServerData.mapSize+20, Config.ARGB_8888);
 		Canvas can = new Canvas(target);
 		CGPoint pt;
