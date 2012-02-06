@@ -1,5 +1,6 @@
 package com.wingsinus.fron;
 
+import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.types.CGPoint;
 
 public class FronUtil {
@@ -14,5 +15,9 @@ public class FronUtil {
 		ret.y = 15 * (pt.x + pt.y);
 		
 		return ret;
+	}
+	
+	public static CGPoint convertTogl(float x, float y) {
+		return CCDirector.sharedDirector().convertToGL(CGPoint.make(x, y));
 	}
 }

@@ -12,19 +12,37 @@ public class MapItemFactory {
 	public static int CHERRY_PINK = 1001;
 	public static int WATERFEED = 1002;
 	
-	public static MapItemController makeMapItem(int type) {
-		MapItemController item = null;
+	public static ItemModel makeItemModel(int type) {
+		ItemModel model = new ItemModel();
 		switch(type)
 		{
 		case 1001:
-			item = new MapItemController("cherry_pink.png", 0, -100);
-			item.setRotateCenter(0.5f, 0.3f);
+			model.fileName = "cherry_pink.png";
+			model.defaultX = 0;
+			model.defaultY = -100;
+			model.anchorX = 0.5f;
+			model.anchorY = 0.5f;
 			break;
 		case 1002:
-			item = new MapItemController("water_feed.png", -10, -5);
-			item.setRotateCenter(0.7f, 0.7f);
+			model.fileName = "water_feed.png";
+			model.defaultX = -10;
+			model.defaultY = -5;
+			model.anchorX = 0.7f;
+			model.anchorY = 0.7f;
 			break;
 		}
-		return item;
+		return model;
 	}
 }
+//public String fileName;
+//public int sizeX;
+//public int sizeY;
+//public float defaultX;
+//public float defaultY;
+//public float anchorX;
+//public float anchorY;
+//
+//public int coinPrice;
+//public int couponPrice;
+//public int woodPrice;
+//public float fronIndex;

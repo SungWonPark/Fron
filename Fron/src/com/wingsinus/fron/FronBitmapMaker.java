@@ -1,23 +1,21 @@
 package com.wingsinus.fron;
 
 import java.io.InputStream;
-import java.nio.Buffer;
 import java.util.Hashtable;
 
 import org.cocos2d.nodes.CCDirector;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.Config;
 import android.util.Log;
 
 public class FronBitmapMaker {
 
 	private static FronBitmapMaker maker;
-	private Hashtable<String, boolean[]> name2AreaHash;
+	private Hashtable<String, boolean[][]> name2AreaHash;
 	
 	private FronBitmapMaker() {
-		name2AreaHash = new Hashtable<String, boolean[]>();
+		name2AreaHash = new Hashtable<String, boolean[][]>();
 	}
 	public Bitmap makeBitmap(String fileName, boolean checkArea) {
 		try {
@@ -41,12 +39,12 @@ public class FronBitmapMaker {
 	private void makeClickArea(String name, Bitmap bitmap) {
 		int width = bitmap.getWidth();
 		int height = bitmap.getHeight();
-		boolean[] area = new boolean[width*height];
+		boolean[][] area = new boolean[height][width];
 		int[] buf = new int[width*height];
 		bitmap.getPixels(buf,  0, width, 0, 0, width, height);
-		for(int i= 0; i < width; i++) {
-			for(int j = 0; j < height; j++) {
-				area[i*j] = (buf[i*j] != 0);
+		for(int i= 0; i < height; i++) {
+			for(int j = 0; j < width; j++) {
+				area[i][j] = (buf[i*width+j] != 0);
 			}
 		}
 		name2AreaHash.put(name,  area);
@@ -54,9 +52,9 @@ public class FronBitmapMaker {
 	
 	public boolean checkClickArea(String name, float x, float y) {
 		try {
-			boolean[] area = name2AreaHash.get(name);
+			boolean[][] area = name2AreaHash.get(name);
 			if(area != null) {
-				return area[Math.round(x) * Math.round(y)];
+				return area[Math.round(y)][Math.round(x)];
 			}
 		}
 		catch(Exception e) {

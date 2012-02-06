@@ -44,6 +44,7 @@ public class SceneManager {
        mainScene.addChild(dlgLayer);
        mapLayer.init();
        interfaceLayer.init();
+       dlgLayer.init();
        CCDirector.sharedDirector().runWithScene(mainScene);
 	}
 	

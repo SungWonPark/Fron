@@ -4,6 +4,7 @@ import org.cocos2d.nodes.CCNode;
 import org.cocos2d.nodes.CCSprite;
 import org.cocos2d.types.CGPoint;
 import org.cocos2d.types.CGRect;
+import org.cocos2d.types.CGSize;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -26,10 +27,14 @@ public class MapItemController implements IInterfaceDelegate{
 	private float anchorY;
 	private boolean isRotated = false;
 	
-	public MapItemController(String fileName, float initX, float initY) {
-		this.fileName = fileName;
-		defaultX = initX;
-		defaultY = initY;
+	public MapItemController(ItemModel model) {
+		this.fileName = model.fileName;
+		defaultX = model.defaultX;
+		defaultY = model.defaultY;
+		anchorX = model.anchorX;
+		anchorY = model.anchorY;
+		sizeX = model.sizeX;
+		sizeY = model.sizeY;
 		makeImage();
 	}
 	
@@ -48,11 +53,9 @@ public class MapItemController implements IInterfaceDelegate{
 	}
 	public void rotate() {
 		isRotated = !isRotated;
-		getImage().setScaleX(getImage().getScaleX()*-1);
+		mainImage.setScaleX(mainImage.getScaleX()*-1);
 	}
 	public CCNode getImage() {
-		if(mainImage == null)
-			makeImage();
 		return mainImage;
 	}
 	public void isoMoveTo(int x, int y) {
@@ -68,15 +71,29 @@ public class MapItemController implements IInterfaceDelegate{
 		mainImage.setPosition(current.x + x,  current.y+y);
 	}
 	public boolean checkDown(CGPoint pt) {
-		if(getImage().getBoundingBox().contains(pt.x, pt.y)) {
-			return true;
+		CGRect box = mainImage.getBoundingBox();
+		if(box.contains(pt.x, pt.y)) {
+			CGPoint origin = box.origin;
+			Log.i("box touch", "a");
+			if(FronBitmapMaker.getInstance().checkClickArea(this.fileName, pt.x - origin.x, box.size.height - (pt.y - origin.y))) {
+				Log.i("area touch", "a");
+				return true;
+			}
+			else
+				return false;
 		}
 		return false;
 	}
 
 	public boolean checkAndClick(CGPoint pt) {
-		if(getImage().getBoundingBox().contains(pt.x, pt.y))
-			return true;
+		CGRect box = mainImage.getBoundingBox();
+		if(box.contains(pt.x, pt.y)) {
+			CGPoint origin = box.origin;
+			if(FronBitmapMaker.getInstance().checkClickArea(this.fileName, pt.x - origin.x, box.size.height - (pt.y - origin.y)))
+				return true;
+			else
+				return false;
+		}
 		return false;
 	}
 }

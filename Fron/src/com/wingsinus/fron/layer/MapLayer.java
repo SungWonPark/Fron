@@ -13,9 +13,9 @@ import com.wingsinus.fron.FronBitmapMaker;
 import com.wingsinus.fron.FronUtil;
 import com.wingsinus.fron.GameStatus;
 import com.wingsinus.fron.ServerData;
+import com.wingsinus.fron.mapitem.ItemModel;
 import com.wingsinus.fron.mapitem.MapItemController;
 import com.wingsinus.fron.mapitem.MapItemFactory;
-import com.wingsinus.test.R;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -47,8 +47,8 @@ public class MapLayer extends CCColorLayer {
 		list = new ArrayList<MapItemController>();
 		
 		MapItemController item = null;
-		
-		item = MapItemFactory.makeMapItem(MapItemFactory.CHERRY_PINK);
+		ItemModel model = MapItemFactory.makeItemModel(MapItemFactory.CHERRY_PINK);
+		item = 
 		list.add(item);
 		addChild(item.getImage());
 		item.isoMoveTo(0,  0);
